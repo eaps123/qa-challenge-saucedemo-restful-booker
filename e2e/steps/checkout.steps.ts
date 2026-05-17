@@ -91,3 +91,24 @@ Then('o carrinho deve refletir {string} produtos', async function (quantity: str
     ).toHaveText(quantity);
 }
 );
+
+When('removo o produto do carrinho', async function () {
+    await this.cartPage.removeProduct(
+        'sauce-labs-backpack'
+    );
+});
+
+When('ordeno os produtos por {string}', async function (filter: string) {
+    await this.inventoryPage.sortProducts(filter);
+});
+
+Then('o carrinho deve ficar vazio', async function () {
+    const items =
+        await this.cartPage.getCartItemsCount();
+
+    expect(items).toBe(0);
+});
+
+Then('os produtos devem ser ordenados corretamente', async function () {
+    await expect(this.page).toHaveURL(/inventory/);
+});

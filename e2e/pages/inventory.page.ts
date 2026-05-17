@@ -1,7 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 
 export class InventoryPage {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   // SELECTORS
 
@@ -20,6 +20,9 @@ export class InventoryPage {
   private readonly logoutBtn =
     '#logout_sidebar_link';
 
+  private readonly sortSelect =
+    '[data-test="product-sort-container"]';
+
   // ACTIONS
 
   async addProduct() {
@@ -31,15 +34,33 @@ export class InventoryPage {
   async addProductById(
     productId: string
   ) {
-    await this.page.click(`[data-test="add-to-cart-${productId}"]`);
+    await this.page.click(
+      `[data-test="add-to-cart-${productId}"]`
+    );
+  }
+
+  async removeProductById(
+    productId: string
+  ) {
+    await this.page.click(
+      `[data-test="remove-${productId}"]`
+    );
   }
 
   async addMultipleProducts() {
     await this.addProductById(
       'sauce-labs-backpack'
     );
+
     await this.addProductById(
       'sauce-labs-bike-light'
+    );
+  }
+
+  async sortProducts(value: string) {
+    await this.page.selectOption(
+      this.sortSelect,
+      value
     );
   }
 

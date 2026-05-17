@@ -1,10 +1,9 @@
 export default {
-  api: {
-    dummy: 'https://dummyjson.com',
-    viacep: 'https://viacep.com.br/ws/',
+  web: {
+    saucedemo: 'https://www.saucedemo.com'
   },
 
-  web: {
-    saucedemo: 'https://www.saucedemo.com',
-  },
+  api: {
+    restfulBooker: 'https://restful-booker.herokuapp.com'
+  }
 };

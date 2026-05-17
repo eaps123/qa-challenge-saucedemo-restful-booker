@@ -17,3 +17,11 @@ Feature: Login
       | username      | password       | message              |
       | standard_user | wrong_password | Epic sadface         |
       |               |                | Username is required |
+
+  Scenario: Login com usuário bloqueado
+    When realizo login com usuário "locked_out_user" e senha "secret_sauce"
+    Then devo ver a mensagem "Epic sadface"
+
+  Scenario: Login com problem user
+    When realizo login com usuário "problem_user" e senha "secret_sauce"
+    Then devo ver a página de produtos

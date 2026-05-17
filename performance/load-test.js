@@ -4,153 +4,170 @@ import { Trend, Rate } from 'k6/metrics';
 import { apiConfig } from './config.js';
 
 const successRate = new Rate('success_rate');
-const productsLatency = new Trend('products_latency');
-const productDetailsLatency = new Trend('product_details_latency');
-const cartsLatency = new Trend('carts_latency');
-const baseURL = apiConfig.api.dummy;
+const authLatency = new Trend('auth_latency');
+const createBookingLatency = new Trend('create_booking_latency');
+const getBookingLatency = new Trend('get_booking_latency');
+
+const baseURL =
+  apiConfig.api.restfulBooker;
 
 export const options = {
   scenarios: {
 
-    products_list: {
+    auth_flow: {
       executor: 'constant-vus',
-      vus: 300,
-      duration: '5m',
-      exec: 'getProducts',
+      vus: 20,
+      duration: '3m',
+      exec: 'authenticate',
     },
 
-    product_details: {
+    create_booking_flow: {
       executor: 'constant-vus',
-      vus: 150,
+      vus: 40,
       duration: '5m',
-      exec: 'getProductById',
+      exec: 'createBooking',
     },
 
-    carts: {
+    get_booking_flow: {
       executor: 'constant-vus',
-      vus: 50,
+      vus: 60,
       duration: '5m',
-      exec: 'createCart',
+      exec: 'getBooking',
     },
   },
 
   thresholds: {
-    http_req_duration: ['p(95)<800'],
-    http_req_failed: ['rate<0.01'],
+    http_req_duration: ['p(95)<1000'],
+    http_req_failed: ['rate<0.05'],
 
     success_rate: ['rate>0.99'],
 
-    products_latency: ['p(95)<700'],
-    product_details_latency: ['p(95)<500'],
-    carts_latency: ['p(95)<900'],
+    auth_latency: ['p(95)<800'],
+    create_booking_latency: ['p(95)<1200'],
+    get_booking_latency: ['p(95)<700'],
   },
 };
-
-function randomProductId() {
-  return Math.floor(Math.random() * 20) + 1;
-}
 
 const params = {
   headers: {
     'Content-Type': 'application/json',
+    Accept: 'application/json',
   },
 };
 
 // =========================
-// GET PRODUCTS
+// AUTH
 // =========================
-export function getProducts() {
 
-  const res = http.get(
-    `${baseURL}/products`,
-    params
-  );
-
-  const success = check(res, {
-    'GET /products - status 200': (r) => r.status === 200,
-
-    'GET /products - has products': (r) =>
-      r.json().products.length > 0,
-  });
-
-  successRate.add(success);
-
-  productsLatency.add(
-    res.timings.duration
-  );
-
-  sleep(1);
-}
-
-// =========================
-// GET PRODUCT BY ID
-// =========================
-export function getProductById() {
-
-  const productId = randomProductId();
-
-  const res = http.get(
-    `${baseURL}/products/${productId}`,
-    params
-  );
-
-  const success = check(res, {
-    'GET /products/:id - status 200': (r) =>
-      r.status === 200,
-
-    'GET /products/:id - valid id': (r) =>
-      r.json().id === productId,
-  });
-
-  successRate.add(success);
-
-  productDetailsLatency.add(
-    res.timings.duration
-  );
-
-  sleep(1);
-}
-
-// =========================
-// CREATE CART
-// =========================
-export function createCart() {
-
-  const productId = randomProductId();
+export function authenticate() {
 
   const payload = JSON.stringify({
-    userId: Math.floor(Math.random() * 10),
-
-    products: [
-      {
-        productId,
-        quantity: Math.floor(Math.random() * 3) + 1,
-      },
-    ],
+    username: 'admin',
+    password: 'password123',
   });
 
   const res = http.post(
-    `${baseURL}/carts/add`,
+    `${baseURL}/auth`,
     payload,
     params
   );
 
   const success = check(res, {
-    'POST /carts/add - success': (r) =>
-      [200, 201].includes(r.status),
+    'POST /auth - status 200': (r) =>
+      r.status === 200,
+
+    'POST /auth - token generated': (r) =>
+      r.json('token') !== undefined,
   });
 
   successRate.add(success);
 
-  cartsLatency.add(
+  authLatency.add(
     res.timings.duration
   );
 
   sleep(1);
 }
 
+// =========================
+// CREATE BOOKING
+// =========================
+
+export function createBooking() {
+
+  const payload = JSON.stringify({
+    firstname: 'Everton',
+    lastname: 'QA',
+    totalprice: 999,
+    depositpaid: true,
+
+    bookingdates: {
+      checkin: '2026-01-01',
+      checkout: '2026-01-10',
+    },
+
+    additionalneeds: 'Breakfast',
+  });
+
+  const res = http.post(
+    `${baseURL}/booking`,
+    payload,
+    params
+  );
+
+  const success = check(res, {
+    'POST /booking - status 200': (r) =>
+      r.status === 200,
+
+    'POST /booking - booking created': (r) =>
+      r.json('bookingid') !== undefined,
+  });
+
+  successRate.add(success);
+
+  createBookingLatency.add(
+    res.timings.duration
+  );
+
+  sleep(1);
+}
+
+// =========================
+// GET BOOKING
+// =========================
+
+export function getBooking() {
+
+  const bookingId =
+    Math.floor(Math.random() * 100) + 1;
+
+  const res = http.get(
+    `${baseURL}/booking/${bookingId}`,
+    params
+  );
+
+  const success = check(res, {
+    'GET /booking/:id - valid response': (r) =>
+      [200, 404].includes(r.status),
+  });
+
+  successRate.add(success);
+
+  getBookingLatency.add(
+    res.timings.duration
+  );
+
+  sleep(1);
+}
+
+// =========================
+// SUMMARY
+// =========================
+
 export function handleSummary(data) {
+
   return {
-    'reports/k6-summary.json': JSON.stringify(data, null, 2),
+    'reports/k6-summary.json':
+      JSON.stringify(data, null, 2),
   };
 }

@@ -25,3 +25,13 @@ Feature: Checkout
   Scenario: Adicionar múltiplos produtos
     When adiciono múltiplos produtos ao carrinho
     Then o carrinho deve refletir "2" produtos
+
+  Scenario: Remover produto do carrinho
+    When adiciono um produto ao carrinho
+    And vou para o carrinho
+    And removo o produto do carrinho
+    Then o carrinho deve ficar vazio
+
+  Scenario: Ordenar produtos por menor preço
+    When ordeno os produtos por "lohi"
+    Then os produtos devem ser ordenados corretamente

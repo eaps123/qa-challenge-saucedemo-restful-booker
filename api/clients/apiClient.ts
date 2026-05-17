@@ -22,7 +22,7 @@ export class ApiClient {
         'User-Agent': 'qa-automation',
 
         ...(this.token && {
-          Authorization: `Bearer ${this.token}`
+          Cookie: `token=${this.token}`
         })
       }
     });

@@ -7,7 +7,8 @@ import { Page, Locator } from '@playwright/test';
 
 export class CartPage {
 
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
+
   private readonly checkoutButton =
     '#checkout';
 
@@ -23,14 +24,23 @@ export class CartPage {
   async startCheckout() {
     await this.page.click(this.checkoutButton);
   }
+
   async getCartItemsCount(): Promise<number> {
     return await this.page
       .locator(this.cartItem)
       .count();
   }
+
+  async removeProduct(productId: string) {
+    await this.page.click(
+      `[data-test="remove-${productId}"]`
+    );
+  }
+
   getCartBadge(): Locator {
     return this.page.locator(this.cartBadge);
   }
+
   getEmptyCartMessage(): Locator {
     return this.page.locator(this.emptyCartMessage);
   }
