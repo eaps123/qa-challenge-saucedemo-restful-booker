@@ -1,0 +1,866 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "checkout;compra-realizada-com-sucesso",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Compra realizada com sucesso",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24405684100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou logado na aplicação",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7044827199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "adiciono um produto ao carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 894435499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "vou para o carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 177023500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "finalizo a compra com dados válidos",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 158807899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "devo ver a confirmação de compra",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:67"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4418999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2489939800
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 6
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "checkout;checkout-com-dados-inválidos",
+        "keyword": "Scenario",
+        "line": 14,
+        "name": "Checkout com dados inválidos",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 311505700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou logado na aplicação",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1964800499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "adiciono um produto ao carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50514199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "vou para o carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43061900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "finalizo a compra sem preencher dados obrigatórios",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119074500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "devo ver uma mensagem de erro no checkout",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4385399
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2814273499
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@negative",
+            "line": 13
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "checkout;carrinho-vazio",
+        "keyword": "Scenario",
+        "line": 20,
+        "name": "Carrinho vazio",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 336621900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou logado na aplicação",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1468087999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "acesso o carrinho sem produtos",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25235199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "tento finalizar a compra",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:52"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 82245900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "devo ver uma mensagem de carrinho vazio",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3437100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2652190800
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "checkout;adicionar-múltiplos-produtos",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Adicionar múltiplos produtos",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 313957999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou logado na aplicação",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1228283600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "adiciono múltiplos produtos ao carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80150600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "o carrinho deve refletir \"2\" produtos",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:88"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2914999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 3558646800
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "checkout;remover-produto-do-carrinho",
+        "keyword": "Scenario",
+        "line": 29,
+        "name": "Remover produto do carrinho",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 338356099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou logado na aplicação",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1778185599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "adiciono um produto ao carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43951800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "vou para o carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 46304800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "removo o produto do carrinho",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45041299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "o carrinho deve ficar vazio",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2609799
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2363594799
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "checkout;ordenar-produtos-por-menor-preço",
+        "keyword": "Scenario",
+        "line": 35,
+        "name": "Ordenar produtos por menor preço",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 701957000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou logado na aplicação",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1034883699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 36,
+            "name": "ordeno os produtos por \"lohi\"",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:101"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11352699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 37,
+            "name": "os produtos devem ser ordenados corretamente",
+            "match": {
+              "location": "e2e\\steps\\checkout.steps.ts:112"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3122800
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 3454812900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "checkout",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Checkout",
+    "tags": [],
+    "uri": "e2e\\features\\checkout.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login;login-com-sucesso",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Login com sucesso",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 329464200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou na página de login",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 979118700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "realizo login com usuário \"standard\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 159272900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "devo ver a página de produtos",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4506800
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 3026124800
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 6
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login;login-inválido",
+        "keyword": "Scenario Outline",
+        "line": 18,
+        "name": "Login inválido",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 326644800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou na página de login",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1202993099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "realizo login com usuário \"standard_user\" e senha \"wrong_password\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125642999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "devo ver a mensagem \"Epic sadface\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 14917199
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2340292799
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@negative",
+            "line": 11
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login;login-inválido",
+        "keyword": "Scenario Outline",
+        "line": 19,
+        "name": "Login inválido",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 364709199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou na página de login",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 900749599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "realizo login com usuário \"\" e senha \"\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105917900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "devo ver a mensagem \"Username is required\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6688800
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2881409499
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@negative",
+            "line": 11
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login;login-com-usuário-bloqueado",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Login com usuário bloqueado",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 336206000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou na página de login",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 905234900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "realizo login com usuário \"locked_out_user\" e senha \"secret_sauce\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 144660000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "devo ver a mensagem \"Epic sadface\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:44"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8388000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2275004200
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login;login-com-problem-user",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Login com problem user",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 305964299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "que estou na página de login",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 976087299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "realizo login com usuário \"problem_user\" e senha \"secret_sauce\"",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 158082000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "devo ver a página de produtos",
+            "match": {
+              "location": "e2e\\steps\\login.steps.ts:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2915700
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2179615900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "login",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Login",
+    "tags": [],
+    "uri": "e2e\\features\\login.feature"
+  }
+]
