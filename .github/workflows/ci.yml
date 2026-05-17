@@ -193,9 +193,23 @@ jobs:
         run: |
           mkdir -p public
 
-          cp -r artifacts/api/* public/ || true
-          cp -r artifacts/e2e/* public/ || true
-          cp -r artifacts/performance/* public/ || true
+          # index principal
+          cp artifacts/e2e/reports/index.html public/index.html || true
+
+          # screenshots
+          cp -r artifacts/e2e/reports/screenshots public/ || true
+
+          # videos
+          cp -r artifacts/e2e/reports/videos public/ || true
+
+          # playwright html report
+          cp -r artifacts/e2e/reports/playwright-report public/ || true
+
+          # k6
+          cp -r artifacts/performance/reports/k6 public/ || true
+
+          # performance analysis
+          cp artifacts/performance/reports/performance-analysis.json public/ || true
 
       - name: 🔍 Validar estrutura final
         run: ls -R public
