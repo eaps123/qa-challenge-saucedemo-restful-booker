@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { BookingFactory } from '../factories/booking.factory';
 import { BookingService } from '../services/booking.service';
+import { BookingResponseSchema } from '../schemas/booking.schema';
 
 test.describe('Restful Booker API', () => {
 
@@ -23,7 +24,8 @@ test.describe('Restful Booker API', () => {
         const authBody =
             await authResponse.json();
 
-        token = authBody.token;
+        token =
+            authBody.token;
     });
 
     test('POST - deve criar reserva', async () => {
@@ -38,6 +40,9 @@ test.describe('Restful Booker API', () => {
 
         const body =
             await response.json();
+
+        // Contract Test (Zod)
+        BookingResponseSchema.parse(body);
 
         expect(body.bookingid)
             .toBeDefined();

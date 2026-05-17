@@ -2,12 +2,21 @@ name: QA Automation CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches:
+      - main
+      - master
+
   pull_request:
+
   workflow_dispatch:
 
 jobs:
-  tests:
+
+  # =========================================================
+  # API TESTS - RESTFUL BOOKER
+  # =========================================================
+  api-tests:
+    name: ⚙️ API Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -18,6 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: 📦 Instalar dependências
         run: npm install
@@ -25,144 +35,125 @@ jobs:
       - name: 🎭 Instalar browsers do Playwright
         run: npx playwright install --with-deps
 
-      # =========================
-      # PREPARAÇÃO DE DIRETÓRIOS
-      # =========================
-      - name: 📁 Criar estrutura de reports
+      - name: 📁 Criar diretórios de reports
+        run: |
+          mkdir -p reports
+          mkdir -p test-results
+
+      - name: ⚙️ Executar testes API
+        run: npm run test:api
+
+      - name: 📊 Upload report API
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-report
+          path: |
+            reports/
+            test-results/
+
+  # =========================================================
+  # E2E TESTS - SAUCEDEMO
+  # =========================================================
+  e2e-tests:
+    name: 🧪 E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Instalar dependências
+        run: npm install
+
+      - name: 🎭 Instalar browsers do Playwright
+        run: npx playwright install --with-deps
+
+      - name: 📁 Criar diretórios de evidências
         run: |
           mkdir -p reports/screenshots
           mkdir -p reports/videos
-          mkdir -p reports/k6
-          mkdir -p public
 
-      # =========================
-      # API TESTS
-      # =========================
-      - name: ⚙️ Rodar testes API
-        run: npm run test:api
-        continue-on-error: true
-
-      # =========================
-      # E2E TESTS
-      # =========================
-      - name: 🧪 Rodar testes E2E
+      - name: 🧪 Executar testes E2E
         run: npm run test:e2e
-        continue-on-error: true
 
-      - name: 🔍 Debug evidências
-        run: |
-          echo "📁 Screenshots:"
-          ls -R reports/screenshots || true
+      - name: 📊 Gerar relatório HTML
+        if: always()
+        run: npm run report
 
-          echo "📁 Videos:"
-          ls -R reports/videos || true
+      - name: 📁 Upload evidências E2E
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-report
+          path: |
+            reports/
+            test-results/
 
-      # =========================
-      # PERFORMANCE (K6)
-      # =========================
-      - name: 🚀 Run K6 tests
-        continue-on-error: true
+  # =========================================================
+  # PERFORMANCE TESTS - RESTFUL BOOKER
+  # =========================================================
+  performance-tests:
+    name: 🚀 Performance Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Instalar dependências
+        run: npm install
+
+      - name: 📁 Criar diretório K6
+        run: mkdir -p reports/k6
+
+      - name: ⚡ Instalar K6
         run: |
           curl -s https://dl.k6.io/key.gpg | sudo apt-key add -
           echo "deb https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
           sudo apt-get update
           sudo apt-get install -y k6
 
+      - name: 🚀 Executar testes de performance
+        run: |
           k6 run performance/load-test.js \
-            --summary-export=reports/k6/k6-summary.json \
-            > reports/k6/k6-log.txt
-
-      # =========================
-      # REPORTS - CUCUMBER e API e PERFORMANCE ANALYSIS
-      # =========================
-      - name: 📊 Gerar API Summary
-        if: always()
-        run: npm run report:api
+            --summary-export=reports/k6/k6-summary.json
 
       - name: 📈 Gerar análise de performance
         if: always()
         run: npm run report:performance
 
-      - name: 📊 Gerar relatório HTML
-        if: always()
-        run: npm run report
-
-      # =========================
-      # K6 HTML REPORT (CORRIGIDO)
-      # =========================
-      - name: 📊 Criar K6 HTML report
-        run: |
-          echo "<html><body><h1>⚡ K6 Summary</h1><pre>" > reports/k6/k6-report.html
-          cat reports/k6/k6-summary.json | jq . >> reports/k6/k6-report.html
-          echo "</pre></body></html>" >> reports/k6/k6-report.html
-
-      # =========================
-      # SCREENSHOTS INDEX
-      # =========================
-      - name: 📸 Criar index de screenshots
-        run: |
-          echo "<h1>📸 Screenshots</h1>" > reports/screenshots/index.html
-
-          for file in reports/screenshots/*.png; do
-            name=$(basename "$file")
-            echo "<div style='margin-bottom:20px'>
-                    <p>$name</p>
-                    <img src=\"$name\" style='width:400px;border-radius:8px'/>
-                  </div>" >> reports/screenshots/index.html
-          done
-
-      # =========================
-      # VIDEOS INDEX
-      # =========================
-      - name: 🎥 Criar index de vídeos
-        run: |
-          echo "<h1>🎥 Videos</h1>" > reports/videos/index.html
-
-          for file in reports/videos/*.webm; do
-            name=$(basename "$file")
-            echo "<div style='margin-bottom:20px'>
-                    <p>$name</p>
-                    <video controls width='400'>
-                      <source src=\"$name\" type='video/webm'>
-                    </video>
-                  </div>" >> reports/videos/index.html
-          done
-
-      # =========================
-      # DASHBOARD ENTRYPOINT
-      # =========================
-      - name: 🧱 Preparar dashboard
-        run: |
-          cp reports/index.html public/index.html
-          cp -r reports/screenshots public/
-          cp -r reports/videos public/
-          cp -r reports/k6 public/
-          cp reports/k6/k6-summary.json public/
-          cp reports/performance-analysis.json public/
-
-      # =========================
-      # DEBUG FINAL
-      # =========================
-      - name: 🔍 Debug public folder
-        run: ls -R public
-
-      # =========================
-      # ARTIFACTS
-      # =========================
-      - name: 📁 Upload artifacts
+      - name: 📁 Upload report performance
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: qa-reports-${{ github.run_id }}
+          name: performance-report
           path: |
-            reports/
-            test-results/
+            reports/k6/
+            reports/performance-analysis.json
 
-  # =========================
-  # DEPLOY GH PAGES
-  # =========================
-  deploy:
-    needs: tests
+  # =========================================================
+  # DEPLOY REPORTS - GITHUB PAGES
+  # =========================================================
+  deploy-report:
+    name: 🌐 Deploy Reports
+    needs:
+      - api-tests
+      - e2e-tests
+      - performance-tests
+
     runs-on: ubuntu-latest
 
     permissions:
@@ -172,19 +163,46 @@ jobs:
       - name: 📥 Checkout
         uses: actions/checkout@v4
 
-      - name: 📥 Download artifact
+      # =====================================================
+      # DOWNLOAD ARTIFACTS
+      # =====================================================
+
+      - name: 📥 Download API report
         uses: actions/download-artifact@v4
         with:
-          name: qa-reports-${{ github.run_id }}
-          path: .
+          name: api-report
+          path: artifacts/api
 
-      - name: 📦 Preparar deploy
+      - name: 📥 Download E2E report
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e-report
+          path: artifacts/e2e
+
+      - name: 📥 Download Performance report
+        uses: actions/download-artifact@v4
+        with:
+          name: performance-report
+          path: artifacts/performance
+
+      # =====================================================
+      # BUILD PUBLIC FOLDER
+      # =====================================================
+
+      - name: 📁 Criar estrutura pública
         run: |
           mkdir -p public
-          cp -r reports/* public/
 
-      - name: 🔍 Debug final
+          cp -r artifacts/api/* public/ || true
+          cp -r artifacts/e2e/* public/ || true
+          cp -r artifacts/performance/* public/ || true
+
+      - name: 🔍 Validar estrutura final
         run: ls -R public
+
+      # =====================================================
+      # DEPLOY GH PAGES
+      # =====================================================
 
       - name: 🚀 Deploy GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

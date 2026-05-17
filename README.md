@@ -1,27 +1,27 @@
 ## 📊 Status do Projeto
 
-![CI](https://github.com/eaps123/qa-automation-fullstack/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/eaps123/qa-challenge-saucedemo-restful-booker/actions/workflows/ci.yml/badge.svg)
 
 ---
 
 # 🧪 QA Automation Challenge
 
-Projeto de automação de testes cobrindo **API, E2E e testes de performance**, utilizando boas práticas de arquitetura, organização e escalabilidade aplicadas em projetos enterprise de QA Automation.
-
-> Projeto atualizado com refatorações recentes focadas em escalabilidade, redução de duplicação e aumento de reutilização em testes E2E com Cucumber + Playwright.
+Projeto de automação de testes desenvolvido para validação da aplicação **web Sauce Demo e da API Restful Booker**, cobrindo testes E2E, API e performance com foco em boas práticas de QA Automation.
 
 ---
 
 ## 📌 Objetivo
 
-Demonstrar habilidades práticas em:
+O projeto foi construído com foco em atender os requisitos do desafio técnico, contemplando:
 
 - Testes E2E com Playwright + Cucumber
 - Testes de API REST
 - Testes de contrato com Zod
 - Testes de performance com K6
 - Integração contínua com GitHub Actions
-- Geração automática de evidências e relatórios
+- Evidências automatizadas
+- Relatórios automatizados
+- Arquitetura escalável para automação
 
 ---
 
@@ -41,63 +41,60 @@ Além disso, foi implementada separação de ambientes (`dev`, `qa` e `prd`) par
 
 ---
 
-## 🔹 APIs utilizadas
+## 🎯 Escopo do Desafio
 
-### dummyjson
+## 🔹 UI Testing — SauceDemo
 
-Utilizada para:
+### Nível 1 (Obrigatório)
+✔️ Login com diferentes tipos de usuários
+✔️ Ordenação de produtos
+✔️ Fluxo completo de compra
+✔️ Remoção de itens do carrinho
+✔️ Navegação entre páginas
+✔️ Logout
 
-- autenticação
-- cenários de CRUD
-- testes positivos e negativos
-- simulação de API REST
+### Nível 2 (Diferencial)
+✔️ Testes automatizados
+✔️ Pipeline CI/CD
+✔️ Evidências automatizadas
+✔️ Estrutura escalável de automação
 
-📍 https://dummyjson.com
+---
+
+## 🔹 API Testing — Restful Booker
+
+### Nível 1 (Obrigatório)
+✔️ Autenticação
+✔️ CRUD de reservas
+✔️ Validação de campos obrigatórios
+
+### Nível 2 (Diferencial)
+✔️ Testes de performance com K6
+✔️ Automação via scripts
+✔️ Pipeline automatizado
 
 ---
 
-### ViaCEP
-
-Utilizada para:
-
-- validação de dados reais
-- consulta de CEP
-- validação de contratos reais
-
-📍 https://viacep.com.br
-
----
 
 ## 🏗️ Estrutura do Projeto
 
 ```bash
-qa-automation-fullstack/
+qa-challenge-saucedemo-restful-booker/
 ├── api/
 │   ├── clients/
 │   │   └── apiClient.ts
 │   │
 │   ├── factories/
-│   │   ├── auth.factory.ts
-│   │   ├── cart.factory.ts
-│   │   └── product.factory.ts
+│   │   └── booking.factory.ts
 │   │
 │   ├── schemas/
-│   │   ├── auth.schema.ts
-│   │   ├── cart.schema.ts
-│   │   ├── cep.schema.ts
-│   │   └── product.schema.ts
+│   │   └── booking.schema.ts
 │   │
 │   ├── services/
-│   │   ├── AuthService.ts
-│   │   ├── CartService.ts
-│   │   ├── CepService.ts
-│   │   └── ProductService.ts
+│   │   └── booking.service.ts
 │   │
 │   └── tests/
-│       ├── auth.spec.ts
-│       ├── cart.spec.ts
-│       ├── cep.spec.ts
-│       └── products.spec.ts
+│       └── booking.spec.ts
 │
 ├── config/
 │   ├── data/
@@ -110,6 +107,16 @@ qa-automation-fullstack/
 │       ├── prd.ts
 │       └── index.ts
 │
+├── docs/
+│   ├── API_SCENARIOS.md
+│   ├── BUG_REPORT.md
+│   ├── EVIDENCES.md
+│   ├── IMPROVEMENTS.md
+│   ├── PERFORMANCE_REPORT.md
+│   ├── RISK_ANALYSIS.md
+│   ├── TEST_CASES.md
+│   └── TEST_PLAN.md
+│
 ├── e2e/
 │   ├── factories/
 │   │   └── checkout.factory.ts
@@ -119,10 +126,10 @@ qa-automation-fullstack/
 │   │   └── login.feature
 │   │ 
 │   ├── pages/
-│   │   ├── CartPage.ts
-│   │   ├── CheckoutPage.ts
-│   │   ├── InventoryPage.ts
-│   │   └── LoginPage.ts
+│   │   ├── cart.page.ts
+│   │   ├── checkout.page.ts
+│   │   ├── inventory.page.ts
+│   │   └── login.page.ts
 │   │ 
 │   ├── steps/
 │   │   ├── checkout.steps.ts
@@ -160,32 +167,19 @@ qa-automation-fullstack/
 
 ## 🧪 Cobertura de Testes
 
-### 🔹 API
+### 🔹 API Testing — Restful Booker
 
-#### Products
+#### 🔐 Auth
 
-- ✔️ GET produtos
-- ✔️ POST produto
-- ✔️ PUT produto
-- ✔️ DELETE produto
+✔️ Geração de token
 
-#### Cart
+#### 📦 Booking
 
-- ✔️ Criação de carrinho
-- ✔️ Atualização de carrinho
-- ✔️ Payload inválido
-
-#### Auth
-
-- ✔️ Login válido
-- ✔️ Login inválido
-- ✔️ Validação de autenticação
-
-#### CEP
-
-- ✔️ Consulta de CEP válido
-- ✔️ Consulta de CEP inválido
-- ✔️ Validação de dados reais
+✔️ Criar reserva
+✔️ Buscar reserva
+✔️ Atualizar reserva
+✔️ Remover reserva
+✔️ Validar payload inválido
 
 ---
 
@@ -200,52 +194,87 @@ Validação de contrato implementada utilizando **Zod Schemas** para garantir:
 
 ---
 
-### 🔹 E2E (BDD com Cucumber + Page Objects + Factories)
-
-Framework de automação estruturado com:
-
-- Cucumber (BDD)
-- Playwright
-- Page Object Model
-- Factories para geração de massa de teste
-- Steps reutilizáveis e parametrizados
-- Validações dinâmicas de UI
+### 🔹 UI Testing — SauceDemo
 
 #### 🔐 Login
-- Login com múltiplos perfis de usuário (dinâmico via step parameter)
-- Login inválido (senha, usuário inexistente e campos vazios)
-- Logout e reautenticação
+✔️ Login com usuário válido
+✔️ Login inválido
+✔️ Login com usuário bloqueado
+✔️ Logout
+✔️ Reautenticação
 
-#### 🛒 Checkout
-- Fluxo completo de compra com dados gerados via Factory
-- Validação de erros de formulário
-- Validação de carrinho vazio
-- Suporte a múltiplos produtos dinamicamente
+#### 🛒 Carrinho
+✔️ Adicionar produto
+✔️ Adicionar múltiplos produtos
+✔️ Remover produto do carrinho
+✔️ Validação de quantidade
+
+#### 💳 Checkout
+✔️ Fluxo completo de compra
+✔️ Checkout inválido
+✔️ Carrinho vazio
+
+#### 🔄 Navegação
+✔️ Navegação entre páginas
+✔️ Redirecionamentos esperados
+
+#### 🔽 Produtos
+✔️ Ordenação por menor preço
+✔️ Interação com inventário
 
 ---
 
 ### 🔹 Performance (K6)
 
-- ✔️ Simulação de múltiplos usuários
-- ✔️ Teste de carga em API pública
-- ✔️ Identificação de comportamento sob estresse
+#### Cenários implementados
+✔️ Autenticação
+✔️ Criação de reservas
+✔️ Consulta de reservas
 
-- **Obs:**
-Durante o teste de carga com 500 VUs simultâneos por 5 minutos, foram observadas degradações progressivas na taxa de sucesso e aumento da latência P95. Como a API utilizada é pública/mock, foram identificados indícios de rate limiting e instabilidade sob alta concorrência, caracterizando um possível gargalo externo da aplicação.
+#### Métricas monitoradas
+✔️ Latência
+✔️ Taxa de erro
+✔️ Tempo de resposta P95
+✔️ Throughput
+✔️ Success rate
+
+#### Observações
+
+Durante os testes de carga foi identificado comportamento de degradação sob alta concorrência na API pública, indicando possíveis limitações externas como:
+
+- rate limiting
+- throttling
+- instabilidade sob carga
+
+Como a API utilizada é pública, esse comportamento foi tratado como limitação externa e documentado como risco técnico.
+
+---
+
+## 🧱 Padrões e Boas Práticas Aplicadas
+
+✔️ Page Object Model
+✔️ Factory Pattern
+✔️ Service Layer Pattern
+✔️ Separação de responsabilidades
+✔️ BDD com Cucumber
+✔️ Reutilização de código
+✔️ Tipagem com TypeScript
+✔️ Estrutura desacoplada
+✔️ Evidências automatizadas
+✔️ Pipeline CI/CD
+✔️ Geração de relatórios
 
 ---
 
 ## ⚙️ Tecnologias Utilizadas
 
-- Node.js
-- TypeScript
 - Playwright
 - Cucumber
-- Zod
-- Faker
+- TypeScript
+- Node.js
 - K6
 - GitHub Actions
-- Cucumber HTML Reporter
+- Zod
 
 ---
 
@@ -254,8 +283,8 @@ Durante o teste de carga com 500 VUs simultâneos por 5 minutos, foram observada
 ### 1. Clonar repositório
 
 ```bash
-git clone https://github.com/eaps123/qa-automation-fullstack
-cd qa-automation-fullstack
+git clone https://github.com/eaps123/qa-challenge-saucedemo-restful-booker
+cd qa-challenge-saucedemo-restful-booker
 ```
 ### 2. Instalar dependências
 
@@ -294,34 +323,34 @@ npm run test:performance
 ```
 ---
 
-### ✔️ Gerar relatórios
+### ✔️ Execução completa
 
 ```bash
-npm run report
+npm run test:full
 ```
 ---
 
 ## 📊 Relatórios e evidências
 
-Após a execução, os relatórios são gerados em:
-
+Os relatórios são gerados automaticamente em::
+```bash
 /reports
-
+```
 Incluindo:
 
--   📊 Cucumber report
--   🔹 API report
--   ⚡ K6 report
--   📸 Screenshots automáticos por cenário
+-   📊 Relatório HTML
+-   📸 Screenshots automáticos
 -   🎥 Vídeos de execução
+-   ⚡ Relatório K6
+-   📈 Análise de performance
 
 ---
 
 ## 🌐 Dashboard online
 
-Acesse o dashboard completo com resultados:
+Acesse o dashboard publicado via GitHub Pages:
 
-https://eaps123.github.io/qa-automation-fullstack/
+https://eaps123.github.io/qa-challenge-saucedemo-restful-booker/
 
 ---
 
@@ -329,80 +358,57 @@ https://eaps123.github.io/qa-automation-fullstack/
 
 Pipeline automatizado com **GitHub Actions**, responsável por:
 
-1.  Testes de API
-2.  Testes E2E
-3.  Testes de performance (K6)
-4.  Geração de relatórios
-5.  Deploy automático no GitHub Pages
+### Fluxos automatizados
+✔️ Instalação de dependências
+✔️ Execução API
+✔️ Execução E2E
+✔️ Execução K6
+✔️ Geração de relatórios
+✔️ Upload de artifacts
+✔️ Deploy GitHub Pages
 
 📍 Acesse na aba **Actions** do repositório
 
 ---
 
-## 🎯 Diferenciais do projeto
+## 📸 Evidências
 
--   🔁 Pipeline completo de QA
--   🧪 Testes API + E2E + Performance
--   📊 Testes de contrato com Zod
--   🧱 Arquitetura enterprise
--   📦 Separação de ambientes
--   📸 Evidências automáticas (screenshots e vídeos)
--   🔍 Código tipado com TypeScript
--   🥒 BDD com Cucumber
--   🧩 Uso de factories para geração de massa dinâmica
--   🚀 Deploy automático
+O projeto gera automaticamente:
+-   screenshots por cenário
+-   gravações de execução
+-   relatórios HTML
+-   relatórios de performance
 
 ---
 
-## 🧠 Boas práticas aplicadas
+## 🔎 Análise de Riscos
 
-* ✔️ Page Object Pattern
-* ✔️ BDD com Cucumber
-* ✔️ Factory Pattern
-* ✔️ Service Layer Pattern
-* ✔️ Separação de camadas (API / E2E / Performance)
-* ✔️ Testes positivos e negativos
-* ✔️ Schema Validation
-* ✔️ Ambientes desacoplados
-* ✔️ Reutilização de client HTTP
-* ✔️ Código tipado
-* ✔️ Evidências automáticas (screenshots)
-* ✔️ Integração com CI/CD
-* ✔️ Código tipado com TypeScript
+### UI
+-   Dependência de ambiente externo público
+-   Possíveis mudanças de layout
+-   Instabilidade intermitente da aplicação
 
-## 🧩 Melhorias recentes aplicadas
+### API
+-   Rate limiting
+-   Instabilidade da API pública
+-   Respostas inconsistentes sob carga
 
-- Refatoração de steps Cucumber para suporte a parâmetros dinâmicos
-- Implementação de Factory Pattern no E2E (CheckoutFactory)
-- Remoção parcial de hardcode em Page Objects (IDs dinâmicos)
-- Centralização de dados de teste em config/data
-- Separação de ambientes (dev/qa/prd) via config/env
-- Criação de helpers reutilizáveis para infraestrutura de testes
+## 💡 Sugestões de Melhoria
+
+- Implementação de testes visuais
+- Integração com Allure Report
+- Execução paralela em múltiplos browsers
+- Testes de acessibilidade automatizados
+- Integração com Docker
+- Execução distribuída em cloud
 
 ---
 
-## 📌 Considerações
+## 📌 Premissas Assumidas
 
-O projeto foi estruturado visando:
-
-* escalabilidade
-* organização
-* legibilidade
-* manutenção simplificada
-* arquitetura enterprise de QA
-
-A aplicação web utilizada para os cenários E2E foi:
-
-* SauceDemo
-
-Durante evolução do projeto, algumas APIs públicas inicialmente utilizadas foram removidas devido a:
-
-* instabilidade
-* bloqueios em pipelines CI
-* limitação de uso
-* inconsistência de contratos
-
-O projeto foi consolidado utilizando APIs mais estáveis para garantir maior confiabilidade dos testes automatizados.
+* APIs públicas podem sofrer instabilidade
+* Ambiente SauceDemo pode apresentar lentidão eventual
+* Testes de performance foram executados respeitando limitações públicas da API
 
 ---
 ## Autor
