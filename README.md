@@ -46,32 +46,32 @@ Além disso, foi implementada separação de ambientes (`dev`, `qa` e `prd`) par
 ## 🔹 UI Testing — SauceDemo
 
 ### Nível 1 (Obrigatório)
-✔️ Login com diferentes tipos de usuários
-✔️ Ordenação de produtos
-✔️ Fluxo completo de compra
-✔️ Remoção de itens do carrinho
-✔️ Navegação entre páginas
-✔️ Logout
+- ✔️ Login com diferentes tipos de usuários
+- ✔️ Ordenação de produtos
+- ✔️ Fluxo completo de compra
+- ✔️ Remoção de itens do carrinho
+- ✔️ Navegação entre páginas
+- ✔️ Logout
 
 ### Nível 2 (Diferencial)
-✔️ Testes automatizados
-✔️ Pipeline CI/CD
-✔️ Evidências automatizadas
-✔️ Estrutura escalável de automação
+- ✔️ Testes automatizados
+- ✔️ Pipeline CI/CD
+- ✔️ Evidências automatizadas
+- ✔️ Estrutura escalável de automação
 
 ---
 
 ## 🔹 API Testing — Restful Booker
 
 ### Nível 1 (Obrigatório)
-✔️ Autenticação
-✔️ CRUD de reservas
-✔️ Validação de campos obrigatórios
+- ✔️ Autenticação
+- ✔️ CRUD de reservas
+- ✔️ Validação de campos obrigatórios
 
 ### Nível 2 (Diferencial)
-✔️ Testes de performance com K6
-✔️ Automação via scripts
-✔️ Pipeline automatizado
+- ✔️ Testes de performance com K6
+- ✔️ Automação via scripts
+- ✔️ Pipeline automatizado
 
 ---
 
@@ -171,15 +171,15 @@ qa-challenge-saucedemo-restful-booker/
 
 #### 🔐 Auth
 
-✔️ Geração de token
+- ✔️ Geração de token
 
 #### 📦 Booking
 
-✔️ Criar reserva
-✔️ Buscar reserva
-✔️ Atualizar reserva
-✔️ Remover reserva
-✔️ Validar payload inválido
+- ✔️ Criar reserva
+- ✔️ Buscar reserva
+- ✔️ Atualizar reserva
+- ✔️ Remover reserva
+- ✔️ Validar payload inválido
 
 ---
 
@@ -197,46 +197,46 @@ Validação de contrato implementada utilizando **Zod Schemas** para garantir:
 ### 🔹 UI Testing — SauceDemo
 
 #### 🔐 Login
-✔️ Login com usuário válido
-✔️ Login inválido
-✔️ Login com usuário bloqueado
-✔️ Logout
-✔️ Reautenticação
+- ✔️ Login com usuário válido
+- ✔️ Login inválido
+- ✔️ Login com usuário bloqueado
+- ✔️ Logout
+- ✔️ Reautenticação
 
 #### 🛒 Carrinho
-✔️ Adicionar produto
-✔️ Adicionar múltiplos produtos
-✔️ Remover produto do carrinho
-✔️ Validação de quantidade
+- ✔️ Adicionar produto
+- ✔️ Adicionar múltiplos produtos
+- ✔️ Remover produto do carrinho
+- ✔️ Validação de quantidade
 
 #### 💳 Checkout
-✔️ Fluxo completo de compra
-✔️ Checkout inválido
-✔️ Carrinho vazio
+- ✔️ Fluxo completo de compra
+- ✔️ Checkout inválido
+- ✔️ Carrinho vazio
 
 #### 🔄 Navegação
-✔️ Navegação entre páginas
-✔️ Redirecionamentos esperados
+- ✔️ Navegação entre páginas
+- ✔️ Redirecionamentos esperados
 
 #### 🔽 Produtos
-✔️ Ordenação por menor preço
-✔️ Interação com inventário
+- ✔️ Ordenação por menor preço
+- ✔️ Interação com inventário
 
 ---
 
 ### 🔹 Performance (K6)
 
 #### Cenários implementados
-✔️ Autenticação
-✔️ Criação de reservas
-✔️ Consulta de reservas
+- ✔️ Autenticação
+- ✔️ Criação de reservas
+- ✔️ Consulta de reservas
 
 #### Métricas monitoradas
-✔️ Latência
-✔️ Taxa de erro
-✔️ Tempo de resposta P95
-✔️ Throughput
-✔️ Success rate
+- ✔️ Latência
+- ✔️ Taxa de erro
+- ✔️ Tempo de resposta P95
+- ✔️ Throughput
+- ✔️ Success rate
 
 #### Observações
 
@@ -252,17 +252,17 @@ Como a API utilizada é pública, esse comportamento foi tratado como limitaçã
 
 ## 🧱 Padrões e Boas Práticas Aplicadas
 
-✔️ Page Object Model
-✔️ Factory Pattern
-✔️ Service Layer Pattern
-✔️ Separação de responsabilidades
-✔️ BDD com Cucumber
-✔️ Reutilização de código
-✔️ Tipagem com TypeScript
-✔️ Estrutura desacoplada
-✔️ Evidências automatizadas
-✔️ Pipeline CI/CD
-✔️ Geração de relatórios
+- ✔️ Page Object Model
+- ✔️ Factory Pattern
+- ✔️ Service Layer Pattern
+- ✔️ Separação de responsabilidades
+- ✔️ BDD com Cucumber
+- ✔️ Reutilização de código
+- ✔️ Tipagem com TypeScript
+- ✔️ Estrutura desacoplada
+- ✔️ Evidências automatizadas
+- ✔️ Pipeline CI/CD
+- ✔️ Geração de relatórios
 
 ---
 
@@ -359,13 +359,13 @@ https://eaps123.github.io/qa-challenge-saucedemo-restful-booker/
 Pipeline automatizado com **GitHub Actions**, responsável por:
 
 ### Fluxos automatizados
-✔️ Instalação de dependências
-✔️ Execução API
-✔️ Execução E2E
-✔️ Execução K6
-✔️ Geração de relatórios
-✔️ Upload de artifacts
-✔️ Deploy GitHub Pages
+- ✔️ Instalação de dependências
+- ✔️ Execução API
+- ✔️ Execução E2E
+- ✔️ Execução K6
+- ✔️ Geração de relatórios
+- ✔️ Upload de artifacts
+- ✔️ Deploy GitHub Pages
 
 📍 Acesse na aba **Actions** do repositório
 
